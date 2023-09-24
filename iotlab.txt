@@ -1,0 +1,54 @@
+//IRpin,Led,ESp32
+
+#define Ledpin 13
+#define IRpin 14
+void setup()
+{
+    pinMode(Ledpin,OUTPUT);
+    pinMode(IRpin,INPUT);
+    Serial.begin(9600);
+}
+void loop()
+{
+    bool IRstatus=digitalRead(IRpin);
+    if(IRstatus==true)
+    {
+        digitalWrite(Ledpin,LOW);
+        Serial.print(IRstatus);
+    }
+    else
+    {
+        digitalWriite(Ledpin,HIGH);
+        Serial.print(IRstatus);
+    }
+}
+
+
+//IRpin,PIRpin,ESp32,LED
+
+int IRsensor=2;
+int MotionSensor=27;
+const int LED=4;
+const int LED=12;
+int LEDstate=LOW;
+int pinstatecurrent=LOW;
+int pinstateprevious=LOW;
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(LED,OUTPUT);
+    pinMode(LED1,OUTPUT);
+    pinMode(MotionSensor,INPUT);
+    pinMode(IRsensor,INPUT);
+}
+void loop()
+{
+    pinstateprevious=pinstatecurrent;
+    pinstatecurrent=digitalRead(MotionSensor);
+    if(pinstatecurrent==HIGH && pinstateprevious==LOW)
+    {
+        Serial.println("Motion Detected");
+        digitalWriite(LED,HIGH);
+        delay(3000);
+    }
+}
