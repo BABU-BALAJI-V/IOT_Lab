@@ -51,4 +51,21 @@ void loop()
         digitalWriite(LED,HIGH);
         delay(3000);
     }
+    int IRstatus=digitalRead(IRsensor);
+    if(IRstatus==1)
+    {
+        Serial.println("Person detected but height not matched");
+        digitalWriite(LED1,LOW);
+    }
+    else{
+        Serial.println("Person detected and height matched");
+        digitalWriite(LED1,HIGH);
+        delay(3000);
+    }
+    if(pinstatecurrent==pinstateprevious)
+    {
+        Serial.println("No motion detected");
+        digitalWriite(LED,LOW);
+        digitalWriite(LED1,LOW);
+    }
 }
